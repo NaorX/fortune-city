@@ -4,11 +4,11 @@
 
 Created by [NaorX](https://naorx.com), Fortune City brings an animated studio and a playable 3D city into the browser. Inspired by the presentation of **MONOPOLY Live**, it is a personal project built for the enjoyment of making and playing games.
 
-<p align="center"><strong>Click the image below to watch the gameplay on YouTube:</strong></p>
+<p align="center"><strong>Click the image below to watch the gameplay on YouTube.</strong></p>
 
 <p align="center">
-  <a href="https://youtu.be/DvYrlGD57a8">
-    <img src="https://img.youtube.com/vi/DvYrlGD57a8/maxresdefault.jpg" width="65%" alt="Watch Fortune City gameplay">
+  <a href="https://www.youtube.com/watch?v=6OW6FPBk-U0">
+    <img src="https://img.youtube.com/vi/6OW6FPBk-U0/maxresdefault.jpg" width="65%" alt="Watch Fortune City gameplay">
   </a>
 </p>
 
