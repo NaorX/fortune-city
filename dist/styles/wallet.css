@@ -1,0 +1,401 @@
+.dock-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 10px;
+}
+body.bonus .results-dock,
+body.bonus-transition .results-dock {
+  opacity: 1;
+  pointer-events: auto;
+  width: auto;
+  bottom: 24px;
+}
+body.bonus .results-dock .history,
+body.bonus .results-dock #multiplier,
+body.bonus-transition .results-dock .history,
+body.bonus-transition .results-dock #multiplier {
+  display: none;
+}
+.dock-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 13px;
+  border-radius: 22px;
+  border: 1px solid #d5bd8266;
+  background: #17251fdd;
+  color: #f1e5c8;
+  font:
+    700 11px/1 Arial,
+    sans-serif;
+  letter-spacing: 0.1px;
+  cursor: pointer;
+}
+.dock-actions button svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+.dock-actions #lobby-button {
+  color: #e3c888;
+}
+.dock-actions button:hover {
+  background: #344033;
+  border-color: #dfc78e;
+}
+.wallet-dialog {
+  width: min(400px, calc(100vw - 28px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 30px;
+  border: 1px solid #b89b60;
+  border-radius: 8px;
+  background: #1b2b24;
+  color: #f4ecd8;
+  text-align: center;
+  box-shadow:
+    0 24px 80px #0009,
+    inset 0 0 0 4px #1b2b24,
+    inset 0 0 0 5px #b89b602b;
+}
+.wallet-dialog::backdrop {
+  background: #10171099;
+  backdrop-filter: blur(3px);
+}
+.wallet-close {
+  position: absolute;
+  top: 13px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  color: #c5baa0;
+  background: transparent;
+  font: 26px/1 Arial;
+  cursor: pointer;
+}
+.wallet-close:hover {
+  background: #ffffff12;
+  color: white;
+}
+.wallet-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: 700 10px/1 Arial;
+  letter-spacing: 1.7px;
+  color: #baa77d;
+  padding: 0;
+}
+.demo-tag {
+  padding: 4px 6px;
+  background: #ffffff0c;
+  border: 1px solid #ffffff21;
+  border-radius: 4px;
+  color: #c8b68c;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.wallet-dialog h2 {
+  font:
+    400 30px/1.2 Georgia,
+    serif;
+  letter-spacing: 0.2px;
+  margin: 12px 0 22px;
+  color: #f5e9ca;
+}
+.wallet-dialog p {
+  color: #c6bea9;
+  font: 400 13px/1.6 Arial;
+}
+.wallet-balance {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  border-bottom: 1px solid #b89b6038;
+  border-radius: 0;
+  background: none;
+  padding: 14px;
+  margin-bottom: 20px;
+  font: 12px Arial;
+  color: #bfb499;
+}
+.wallet-balance strong {
+  font: 600 26px Arial;
+  color: #ead49d;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.wallet-dialog fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.wallet-dialog label {
+  display: block;
+  font: 700 12px Arial;
+  color: #ded2b4;
+  margin-bottom: 9px;
+  text-align: left;
+}
+.deposit-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 13px;
+  height: 50px;
+  background: #101e19;
+  border: 1px solid #776c4e;
+  border-radius: 8px;
+  color: #d3bd84;
+}
+.deposit-input:focus-within {
+  border-color: #d9bb76;
+  box-shadow: 0 0 0 3px #d9bb761c;
+}
+.deposit-input input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: none;
+  color: #fff;
+  font: 600 18px Arial;
+  padding: 0;
+  box-shadow: none;
+  appearance: textfield;
+  text-align: center;
+}
+.deposit-input input::-webkit-inner-spin-button,
+.deposit-input input::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.deposit-input input::placeholder {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9b9785;
+}
+.deposit-unit {
+  font: 700 9px Arial;
+  letter-spacing: 1px;
+  color: #b8aa88;
+}
+.deposit-presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  margin: 11px 0;
+}
+.deposit-presets button {
+  border: 1px solid #b79d5d55;
+  border-radius: 6px;
+  padding: 8px;
+  background: #ffffff05;
+  color: #e4d8ba;
+  font: 700 12px Arial;
+  cursor: pointer;
+}
+.deposit-presets button:hover {
+  border-color: #d7b976;
+  color: #f6e1ac;
+}
+.wallet-primary {
+  display: block;
+  width: 100%;
+  border: 1px solid #e0c584;
+  border-radius: 8px;
+  min-height: 44px;
+  padding: 11px;
+  background: linear-gradient(#e4ce96, #c4a565);
+  color: #27291e;
+  font: 700 14px Arial;
+  cursor: pointer;
+}
+.wallet-primary:hover {
+  filter: brightness(1.08);
+}
+.wallet-dialog button:focus-visible {
+  outline: 2px solid #e4c788;
+  outline-offset: 3px;
+}
+.wallet-dialog fieldset:disabled button {
+  cursor: wait;
+  opacity: 0.65;
+}
+#deposit-error {
+  margin: 0 0 12px;
+  color: #ffb8a9;
+  font-size: 12px;
+}
+#deposit-error:empty {
+  display: none;
+}
+.deposit-status {
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 12px;
+}
+.deposit-status:empty {
+  display: none;
+}
+.processing .deposit-status::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border: 2px solid #766e56;
+  border-top-color: #dec184;
+  border-radius: 50%;
+  animation: wallet-spin 0.8s linear infinite;
+}
+[data-deposit-success] {
+  text-align: center;
+}
+[data-deposit-success][hidden] {
+  display: none;
+}
+.deposit-check {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 13px;
+  border: 1px solid #c5ab6e;
+  border-radius: 50%;
+  color: #e3cc95;
+  background: #c5ab6e12;
+  font: 26px Arial;
+}
+[data-deposit-success] h3 {
+  margin: 0 0 8px;
+  font: 700 20px Arial;
+}
+[data-added] {
+  font: 700 30px Arial;
+  color: #e7cf91;
+  overflow-wrap: anywhere;
+}
+[data-deposit-success] p {
+  margin: 6px 0 22px;
+}
+@keyframes wallet-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.wallet-emblem {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 17px;
+  border: 1px solid #c5a76266;
+  border-radius: 50%;
+  background: #c5a76209;
+  color: #dac28b;
+}
+.wallet-emblem svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.coming-soon {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #c5ab6e10;
+  color: #dac28b;
+  font: 700 9px/1 Arial;
+  letter-spacing: 1.4px;
+}
+#lobby-dialog h2 {
+  margin-bottom: 15px;
+}
+#lobby-dialog p {
+  margin: 18px 0 26px;
+}
+.dock-actions button:focus-visible {
+  outline: 2px solid #e4c788;
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  body.bonus .results-dock,
+  body.bonus-transition .results-dock {
+    bottom: 12px;
+    right: 12px;
+  }
+  body.bonus .dock-actions,
+  body.bonus-transition .dock-actions {
+    flex-direction: column;
+    width: 96px;
+  }
+  .dock-actions {
+    gap: 5px;
+  }
+  .dock-actions button {
+    padding: 0 10px;
+    font-size: 9px;
+    height: 29px;
+  }
+  .wallet-dialog {
+    padding: 23px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .processing .deposit-status::before {
+    animation: none;
+  }
+}
+
+#help-dialog {
+  max-height: calc(100dvh - 24px);
+}
+#help-dialog dl {
+  text-align: left;
+  margin: 22px 0;
+}
+#help-dialog dt {
+  color: #e4cb8d;
+  font: 700 14px Arial;
+  margin: 18px 0 6px;
+}
+#help-dialog dd {
+  margin: 0;
+  color: #d0c6ae;
+  font: 13px/1.65 Arial;
+}
+#help-dialog .help-note {
+  font-size: 11px;
+  color: #b6ad96;
+}
+.help-credit {
+  border-top: 1px solid #b89b6038;
+  padding-top: 16px;
+  color: #d2c4a4;
+  font: 12px/1.9 Arial;
+}
+.help-credit a {
+  color: #e4cb8d;
+  text-underline-offset: 3px;
+}
+
+#help-dialog .wallet-close {
+  left: auto;
+  right: 12px;
+}

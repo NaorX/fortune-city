@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 210" role="img" aria-labelledby="title">
+  <title id="title">Fortune City Live</title>
+  <defs>
+    <linearGradient id="red" x2="0" y2="1">
+      <stop stop-color="#f12b25"/><stop offset=".48" stop-color="#da0a13"/><stop offset="1" stop-color="#94020c"/>
+    </linearGradient>
+    <linearGradient id="silver" x2="0" y2="1">
+      <stop stop-color="#fff"/><stop offset=".46" stop-color="#ececec"/><stop offset=".58" stop-color="#9c9c9c"/><stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="gold" x2="0" y2="1">
+      <stop stop-color="#fff4be"/><stop offset=".35" stop-color="#f5d97e"/><stop offset=".53" stop-color="#b58027"/><stop offset=".7" stop-color="#f8d878"/><stop offset="1" stop-color="#ad7720"/>
+    </linearGradient>
+    <linearGradient id="black" x2="0" y2="1">
+      <stop stop-color="#20221c"/><stop offset="1" stop-color="#030604"/>
+    </linearGradient>
+  </defs>
+  <path d="M166 117H438V197H166Z" fill="#000" opacity=".5"/>
+  <path d="M168 114H432V190H168Z" fill="url(#black)" stroke="url(#gold)" stroke-width="3"/>
+  <path d="M172 119H428" stroke="#fff3b3" opacity=".35"/>
+  <text x="300" y="174" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="61" font-weight="800" letter-spacing="6" fill="url(#gold)">LIVE</text>
+  <path d="M10 13H594V125H10Z" fill="#000" opacity=".65"/>
+  <path d="M5 5H585V117H5Z" fill="url(#silver)" stroke="#242320" stroke-width="3"/>
+  <path d="M13 13H577V109H13Z" fill="url(#red)" stroke="#fff" stroke-width="2"/>
+  <path d="M17 17H573V36H17Z" fill="#ffb3a3" opacity=".1"/>
+  <text x="297" y="88" text-anchor="middle" textLength="540" lengthAdjust="spacingAndGlyphs" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="-2" fill="#70020a" stroke="#70020a" stroke-width="2">FORTUNE CITY</text>
+  <text x="295" y="85" text-anchor="middle" textLength="540" lengthAdjust="spacingAndGlyphs" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="-2" fill="#fffdf7">FORTUNE CITY</text>
+</svg>

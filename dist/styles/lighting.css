@@ -1,0 +1,228 @@
+body {
+  background: #a9c9d9;
+}
+.vignette {
+  background: linear-gradient(180deg, #09243965, transparent 15%, transparent 65%, #06151e85);
+  transition: background 0.7s;
+}
+header {
+  background: linear-gradient(#12334b4a, transparent);
+}
+.show-title {
+  filter: drop-shadow(0 2px 6px #203f5280);
+}
+.show-title h1 {
+  color: #fff8e5;
+  text-shadow:
+    0 2px 2px #46565699,
+    0 8px 30px #20394844;
+}
+.show-title h1 span {
+  color: #ffde8a;
+}
+.show-title .eyebrow,
+.show-title p {
+  color: #fff7dc;
+  text-shadow: 0 1px 4px #1c394e;
+}
+.mode-pill {
+  color: #fff2c6;
+  border-color: #fff3c599;
+}
+.round-panel {
+  background: linear-gradient(135deg, #254a59cf, #153440d6);
+  border-color: #f3d89877;
+  box-shadow: 0 12px 35px #28485c25;
+}
+.round-panel p {
+  color: #edf0e3;
+}
+.round-panel .panel-heading {
+  color: #d9e4df;
+}
+.play-label {
+  color: #fff5dd;
+  text-shadow: 0 1px 4px #17364c;
+}
+.table-brand {
+  background: linear-gradient(115deg, #183a4ed9, #244653a6);
+}
+.console::before {
+  background: linear-gradient(transparent, #112c3fc9 65%);
+}
+.bet {
+  filter: saturate(1.12);
+}
+#scene-curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  background: radial-gradient(ellipse at 50% 40%, #fff6d3, #e8c77c 70%, #b68a43);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.5s,
+    visibility 0.5s;
+  color: #775721;
+}
+#scene-curtain.visible {
+  opacity: 1;
+  visibility: visible;
+}
+#scene-curtain span {
+  font:
+    600 clamp(26px, 5vw, 64px) Outfit,
+    Arial;
+  letter-spacing: 6px;
+}
+#scene-curtain small {
+  font: 12px Outfit;
+  letter-spacing: 5px;
+}
+.bonus-transition .show-title,
+.bonus-transition .round-panel,
+.bonus-transition .console {
+  opacity: 0;
+  pointer-events: none;
+}
+body.bonus .vignette {
+  background: linear-gradient(180deg, #173b5359, transparent 25%, transparent 88%, #163b5333);
+}
+#bonus-hud {
+  top: 85px;
+  border: 1px solid #f9e7b485;
+  border-radius: 7px;
+  background: linear-gradient(130deg, #1b4354ed, #183a48dc);
+  padding: 15px 25px;
+  box-shadow: 0 7px 35px #20495f30;
+  min-width: 350px;
+}
+#bonus-hud h2 {
+  font-size: 25px;
+  margin: 6px 0;
+}
+.bonus-stats {
+  gap: 32px;
+}
+.bonus-stats b {
+  font-size: 27px;
+}
+.bonus-stats span {
+  color: #e0e9e7;
+}
+#bonus-message {
+  font-size: 13px;
+  margin: 7px 0 0;
+  color: #ffedbe;
+}
+.bonus #bonus-hud .eyebrow {
+  font-size: 9px;
+}
+.bonus header {
+  background: linear-gradient(#163d5470, transparent);
+}
+@media (max-width: 700px) {
+  #bonus-hud {
+    top: 75px;
+    min-width: 0;
+    width: calc(100% - 34px);
+    padding: 9px 12px;
+  }
+  #bonus-hud h2 {
+    font-size: 18px;
+    margin: 3px 0;
+  }
+  .bonus-stats {
+    gap: 26px;
+    font-size: 11px;
+  }
+  .bonus-stats b {
+    font-size: 23px;
+  }
+  #bonus-message {
+    font-size: 11px;
+  }
+  .bonus #bonus-hud .eyebrow {
+    display: none;
+  }
+  .round-panel {
+    padding: 8px;
+    background: #173b4fa8;
+    border-radius: 5px;
+    top: 88px;
+    width: 147px;
+  }
+  .round-panel .text-button {
+    font-size: 10px;
+  }
+  .show-title {
+    top: 95px;
+  }
+  .table-brand {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #scene-curtain {
+    transition: none;
+  }
+}
+.console {
+  pointer-events: none;
+}
+.console button {
+  pointer-events: auto;
+}
+.table-note {
+  display: none;
+}
+.round-panel {
+  z-index: 5;
+}
+@media (min-width: 701px) {
+  #game {
+    min-height: 680px;
+  }
+}
+.camera-close #bonus-hud {
+  left: auto;
+  right: 18px;
+  transform: none;
+  min-width: 0;
+  width: 230px;
+  padding: 12px 14px;
+}
+.camera-close #bonus-hud h2,
+.camera-close #bonus-hud .eyebrow {
+  display: none;
+}
+.camera-close #bonus-hud .bonus-stats {
+  gap: 18px;
+}
+.camera-close #bonus-message {
+  font-size: 12px;
+}
+@media (max-width: 700px) {
+  .camera-close #bonus-hud {
+    right: 10px;
+    top: 73px;
+    width: 180px;
+    padding: 8px;
+  }
+  .camera-close #bonus-hud .bonus-stats {
+    gap: 13px;
+    font-size: 10px;
+  }
+  .camera-close #bonus-hud .bonus-stats b {
+    font-size: 19px;
+  }
+  .camera-close #bonus-message {
+    font-size: 10px;
+  }
+}

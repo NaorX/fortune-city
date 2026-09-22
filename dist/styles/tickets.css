@@ -1,0 +1,134 @@
+.bet {
+  position: relative;
+  display: block;
+  padding: 0;
+  color: #faf3de;
+}
+.bet .payout {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  font: 500 8px Arial;
+  letter-spacing: 0.8px;
+  line-height: 11px;
+  margin: 0;
+}
+.bet:not(.bet-roll2):not(.bet-roll4) strong,
+.bet.has-bet:not(.bet-roll2):not(.bet-roll4) strong {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  width: 31px;
+  height: 31px;
+  border: 1.3px solid #f7efdcba;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font:
+    800 20px/1 Arial,
+    Helvetica,
+    sans-serif;
+  line-height: 1;
+  background: #192a242b;
+  text-shadow: none;
+  box-shadow: 0 0 0 3px #f7edcc0a;
+}
+.bet-roll2 strong,
+.bet-roll4 strong,
+.bet.has-bet.bet-roll2 strong,
+.bet.has-bet.bet-roll4 strong {
+  position: absolute;
+  inset: 19px 12px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transform: none;
+  font:
+    800 26px/1 Arial,
+    Helvetica,
+    sans-serif;
+  white-space: nowrap;
+  line-height: 1;
+}
+.bet strong em {
+  font: 600 11px Arial;
+  letter-spacing: 0.5px;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+.bet .dice-icon {
+  font-size: 25px;
+  margin: 0;
+}
+.ticket-corner {
+  width: 8px;
+  height: 8px;
+  border-width: 1px;
+}
+.bet::after {
+  inset: 4px;
+  border-color: #f6ebce6b;
+}
+.bet-amount,
+.bet.has-bet .bet-amount {
+  z-index: 2;
+}
+.bet-roll2 .payout,
+.bet-roll4 .payout {
+  color: #fff7e6;
+}
+.bet:disabled {
+  filter: saturate(0.85);
+}
+@media (max-width: 700px) {
+  .bet .payout {
+    top: 5px;
+    font-size: 7px;
+    line-height: 9px;
+  }
+  .bet:not(.bet-roll2):not(.bet-roll4) strong,
+  .bet.has-bet:not(.bet-roll2):not(.bet-roll4) strong {
+    width: 28px;
+    height: 28px;
+    font-size: 19px;
+    top: 58%;
+  }
+  .bet-roll2 strong,
+  .bet-roll4 strong,
+  .bet.has-bet.bet-roll2 strong,
+  .bet.has-bet.bet-roll4 strong {
+    inset: 17px 7px 6px;
+    font-size: 25px;
+    gap: 4px;
+  }
+  .bet strong em {
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+  .bet .dice-icon {
+    display: none;
+  }
+}
+
+.bets-locked #round-clock,
+.bonus #round-clock {
+  visibility: hidden;
+  pointer-events: none;
+}
+#help-dialog {
+  text-align: center;
+  overflow-y: auto;
+}
+#help-dialog dl,
+#help-dialog p {
+  margin-left: auto;
+  margin-right: auto;
+}
+#help-dialog dd {
+  margin-inline: 0;
+}

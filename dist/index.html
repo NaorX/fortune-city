@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#071d26" />
+    <meta name="description" content="Fortune City - a cinematic 3D wheel and city game" />
+    <title>Fortune City • The Coin Show</title>
+    <link rel="stylesheet" href="styles/base.css?v=gold-loading" />
+    <link rel="stylesheet" href="styles/betting.css?v=chance-frame" />
+    <link rel="stylesheet" href="styles/lighting.css" />
+    <link rel="stylesheet" href="styles/layout.css?v=compact-chips" />
+    <link rel="stylesheet" href="styles/effects.css?v=chance-frame" />
+    <link rel="stylesheet" href="styles/tickets.css?v=clear-numbers" />
+    <link rel="stylesheet" href="styles/bonus-show.css?v=title-visible" />
+    <link rel="stylesheet" href="styles/wallet.css?v=help-style" />
+    <link rel="stylesheet" href="styles/mobile.css?v=repeat-bet" />
+    <link rel="stylesheet" href="styles/social.css" />
+  </head>
+  <body>
+    <main id="game">
+      <div id="scene" aria-label="3D game studio"></div>
+      <div class="vignette"></div>
+      <header>
+        <div class="top-actions">
+          <button
+            id="chat-toggle"
+            class="icon-btn"
+            aria-label="Open chat"
+            aria-expanded="false"
+            aria-controls="chat-panel"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16v12H9l-5 4z" />
+            </svg></button
+          ><button
+            id="sound"
+            class="icon-btn is-muted"
+            aria-label="Sound settings, muted"
+            aria-expanded="false"
+            aria-controls="volume-panel"
+            title="Sound"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 9h4l5-4v14l-5-4H3z" />
+              <path class="sound-waves" d="M16 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" />
+              <path class="sound-slash" d="m16 9 5 6m0-6-5 6" />
+            </svg></button
+          ><button id="help" class="icon-btn" aria-label="How to play">?</button
+          ><button id="fullscreen" class="icon-btn" aria-label="Full screen">⛶</button>
+        </div>
+      </header>
+      <section class="quick-chat" aria-label="Quick chat">
+        <form data-chat-form class="chat-compose">
+          <input
+            aria-label="Quick chat message"
+            placeholder="Quick chat"
+            maxlength="180"
+            autocomplete="off"
+            dir="auto"
+          /><button type="submit" aria-label="Send quick message" disabled>↑</button>
+        </form>
+        <div id="quick-messages" aria-live="polite"></div>
+      </section>
+      <aside id="chat-panel" aria-labelledby="chat-title" hidden>
+        <div class="chat-heading">
+          <h2 id="chat-title">CHAT</h2>
+          <button id="chat-close" aria-label="Close chat">×</button>
+        </div>
+        <div class="chat-caption">FORTUNE CITY <span>LOCAL CHAT</span></div>
+        <div id="chat-messages" role="log" aria-label="Chat history" aria-live="polite"></div>
+        <form data-chat-form class="chat-compose">
+          <input
+            aria-label="Chat message"
+            placeholder="Write a message…"
+            maxlength="180"
+            autocomplete="off"
+            dir="auto"
+          /><button type="submit" aria-label="Send message" disabled>↑</button>
+        </form>
+      </aside>
+      <div id="volume-panel" role="group" aria-label="Volume controls" hidden>
+        <div class="volume-heading">
+          <button id="volume-mute" aria-pressed="true">Unmute</button
+          ><output id="volume-value" for="volume-level">0%</output>
+        </div>
+        <input
+          id="volume-level"
+          aria-label="Sound volume"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          step="1"
+        />
+      </div>
+
+      <aside class="results-dock" aria-label="Recent results">
+        <div class="status-storage" hidden>
+          <span id="round-number"></span><span id="status-orb"></span>
+          <h2 id="status-title"></h2>
+          <p id="status-sub"></p>
+        </div>
+        <div id="multiplier" hidden>ACTIVE <b>×2</b></div>
+        <div id="history" class="history"></div>
+        <nav class="dock-actions" aria-label="Game navigation">
+          <button id="lobby-button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" fill="currentColor" />
+            </svg>
+            LOBBY
+          </button>
+          <button id="deposit-button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 4v16M4 12h16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+              />
+            </svg>
+            DEPOSIT
+          </button>
+        </nav>
+      </aside>
+      <div id="bonus-hud" hidden aria-live="polite">
+        <h2 class="bonus-marquee-title">BONUS WIN <span aria-hidden="true">⚄</span></h2>
+        <div class="marquee-frame">
+          <strong id="bonus-total">$0</strong>
+          <div class="roll-counter"><small>ROLLS</small><b id="rolls-left">4</b></div>
+        </div>
+        <p id="bonus-message" hidden></p>
+      </div>
+      <aside id="property-card" hidden aria-live="polite">
+        <h2 id="property-name"></h2>
+        <strong id="property-multiplier"></strong> <span id="property-chip"></span
+        ><strong id="property-amount"></strong>
+      </aside>
+      <div id="district-preview" hidden>
+        <small id="district-name"></small>
+        <div id="district-values"></div>
+      </div>
+      <div id="scene-curtain" aria-hidden="true">
+        <span>FORTUNE CITY</span><small>THE CITY IS YOURS</small>
+      </div>
+      <section class="console" aria-label="Betting table">
+        <div class="round-clock" id="round-clock" role="timer" aria-label="Time left to bet">
+          <div class="clock-face"><b id="countdown-value">10</b></div>
+          <div><strong id="clock-label">PLACE YOUR BETS</strong><small></small></div>
+        </div>
+        <div class="table-layout">
+          <div class="table-brand" dir="ltr">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 600 210"
+              role="img"
+              aria-labelledby="title"
+            >
+              <title id="title">Fortune City Live</title>
+              <defs>
+                <linearGradient id="red" x2="0" y2="1">
+                  <stop stop-color="#f12b25" />
+                  <stop offset=".48" stop-color="#da0a13" />
+                  <stop offset="1" stop-color="#94020c" />
+                </linearGradient>
+                <linearGradient id="silver" x2="0" y2="1">
+                  <stop stop-color="#fff" />
+                  <stop offset=".46" stop-color="#ececec" />
+                  <stop offset=".58" stop-color="#9c9c9c" />
+                  <stop offset="1" stop-color="#fff" />
+                </linearGradient>
+                <linearGradient id="gold" x2="0" y2="1">
+                  <stop stop-color="#fff4be" />
+                  <stop offset=".35" stop-color="#f5d97e" />
+                  <stop offset=".53" stop-color="#b58027" />
+                  <stop offset=".7" stop-color="#f8d878" />
+                  <stop offset="1" stop-color="#ad7720" />
+                </linearGradient>
+                <linearGradient id="black" x2="0" y2="1">
+                  <stop stop-color="#20221c" />
+                  <stop offset="1" stop-color="#030604" />
+                </linearGradient>
+              </defs>
+              <path d="M166 117H438V197H166Z" fill="#000" opacity=".5" />
+              <path
+                d="M168 114H432V190H168Z"
+                fill="url(#black)"
+                stroke="url(#gold)"
+                stroke-width="3"
+              />
+              <path d="M172 119H428" stroke="#fff3b3" opacity=".35" />
+              <text
+                x="300"
+                y="174"
+                text-anchor="middle"
+                font-family="Arial, Helvetica, sans-serif"
+                font-size="61"
+                font-weight="800"
+                letter-spacing="6"
+                fill="url(#gold)"
+              >
+                LIVE
+              </text>
+              <path d="M10 13H594V125H10Z" fill="#000" opacity=".65" />
+              <path d="M5 5H585V117H5Z" fill="url(#silver)" stroke="#242320" stroke-width="3" />
+              <path d="M13 13H577V109H13Z" fill="url(#red)" stroke="#fff" stroke-width="2" />
+              <path d="M17 17H573V36H17Z" fill="#ffb3a3" opacity=".1" />
+              <text
+                x="297"
+                y="88"
+                text-anchor="middle"
+                textLength="540"
+                lengthAdjust="spacingAndGlyphs"
+                font-family="Arial, Helvetica, sans-serif"
+                font-size="76"
+                font-weight="900"
+                letter-spacing="-2"
+                fill="#70020a"
+                stroke="#70020a"
+                stroke-width="2"
+              >
+                FORTUNE CITY
+              </text>
+              <text
+                x="295"
+                y="85"
+                text-anchor="middle"
+                textLength="540"
+                lengthAdjust="spacingAndGlyphs"
+                font-family="Arial, Helvetica, sans-serif"
+                font-size="76"
+                font-weight="900"
+                letter-spacing="-2"
+                fill="#fffdf7"
+              >
+                FORTUNE CITY
+              </text>
+            </svg>
+          </div>
+          <div class="bet-row" dir="ltr">
+            <button class="bet bet-1" data-bet="1">
+              <span class="ticket-corner tl"></span><span class="ticket-corner tr"></span
+              ><span class="ticket-corner bl"></span><span class="ticket-corner br"></span
+              ><span class="payout">PAYS 1:1</span><strong>1</strong
+              ><span class="bet-amount" aria-hidden="true"></span></button
+            ><button class="bet bet-2" data-bet="2">
+              <span class="ticket-corner tl"></span><span class="ticket-corner tr"></span
+              ><span class="ticket-corner bl"></span><span class="ticket-corner br"></span
+              ><span class="payout">PAYS 2:1</span><strong>2</strong
+              ><span class="bet-amount" aria-hidden="true"></span></button
+            ><button class="bet bet-roll2" data-bet="2R">
+              <span class="ticket-corner tl"></span><span class="ticket-corner tr"></span
+              ><span class="ticket-corner bl"></span><span class="ticket-corner br"></span
+              ><span class="payout">BONUS GAME</span
+              ><strong><span class="dice-icon">⚄</span> 2 <em>ROLLS</em></strong
+              ><span class="bet-amount" aria-hidden="true"></span></button
+            ><button class="bet bet-5" data-bet="5">
+              <span class="ticket-corner tl"></span><span class="ticket-corner tr"></span
+              ><span class="ticket-corner bl"></span><span class="ticket-corner br"></span
+              ><span class="payout">PAYS 5:1</span><strong>5</strong
+              ><span class="bet-amount" aria-hidden="true"></span></button
+            ><button class="bet bet-10" data-bet="10">
+              <span class="ticket-corner tl"></span><span class="ticket-corner tr"></span
+              ><span class="ticket-corner bl"></span><span class="ticket-corner br"></span
+              ><span class="payout">PAYS 10:1</span><strong>10</strong
+              ><span class="bet-amount" aria-hidden="true"></span></button
+            ><button class="bet bet-roll4" data-bet="4R">
+              <span class="ticket-corner tl"></span><span class="ticket-corner tr"></span
+              ><span class="ticket-corner bl"></span><span class="ticket-corner br"></span
+              ><span class="payout">BONUS GAME</span
+              ><strong><span class="dice-icon">⚄</span> 4 <em>ROLLS</em></strong
+              ><span class="bet-amount" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+        <div class="console-top">
+          <div class="wallet">
+            <span class="coin-symbol">F</span>
+            <div><small>BALANCE</small><strong id="balance" dir="ltr">$10,000</strong></div>
+          </div>
+          <div class="chip-picker" dir="ltr" aria-label="Chip value">
+            <button class="chip chip-1" data-chip="1"><span>1</span></button>
+            <button class="chip chip-5" data-chip="5"><span>5</span></button>
+            <button class="chip chip-10" data-chip="10"><span>10</span></button>
+            <button class="chip chip-25 selected" data-chip="25"><span>25</span></button
+            ><button class="chip chip-50" data-chip="50"><span>50</span></button
+            ><button class="chip chip-100" data-chip="100"><span>100</span></button
+            ><button class="chip chip-500" data-chip="500"><span>500</span></button>
+            <button id="repeat-bet" title="Repeat Bet" aria-label="Repeat previous bet" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m17 3 4 4-4 4M21 7H8a5 5 0 0 0-5 5m4 9-4-4 4-4m-4 4h13a5 5 0 0 0 5-5" />
+              </svg></button
+            ><button id="clear" title="Return all bets" aria-label="Return all bets">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5 3.5 9.5 8 14M4 9.5h10a5 5 0 0 1 0 10h-3" />
+              </svg>
+            </button>
+          </div>
+          <div class="stake"><small>TOTAL BET</small><strong id="stake" dir="ltr">$0</strong></div>
+        </div>
+        <div class="console-foot"><button id="refill" hidden>REFILL 10,000</button></div>
+      </section>
+      <div id="toast" role="status"></div>
+      <div id="loading">
+        <div class="loading-mark">F</div>
+        <h2>FORTUNE CITY</h2>
+        <p>The city is waking up.</p>
+        <div class="loading-bar"></div>
+      </div>
+      <div id="chance-overlay" hidden>
+        <div class="chance-stage">
+          <div class="chance-flip">
+            <div class="chance-face chance-face-front">
+              <svg class="chance-question" viewBox="0 0 90 130" aria-hidden="true">
+                <text
+                  x="45"
+                  y="118"
+                  text-anchor="middle"
+                  font-size="128"
+                  font-family="Arial Black, Arial, sans-serif"
+                  font-weight="900"
+                  fill="#fff"
+                  stroke="#141414"
+                  stroke-width="8"
+                  stroke-linejoin="round"
+                  paint-order="stroke"
+                >
+                  ?
+                </text>
+              </svg>
+            </div>
+            <div class="chance-face chance-face-back">
+              <h2>CHANCE</h2>
+              <div class="chance-body">
+                <p id="chance-title"></p>
+                <div class="chance-art chance-art-gift" aria-hidden="true">
+                  <svg viewBox="0 0 180 200">
+                    <rect x="68" y="4" width="44" height="32" rx="3" fill="#111" />
+                    <ellipse cx="90" cy="38" rx="38" ry="7" fill="#111" />
+                    <rect x="72" y="28" width="36" height="6" fill="#fff" />
+                    <circle cx="90" cy="68" r="26" fill="#fff" stroke="#111" stroke-width="3.2" />
+                    <circle cx="66" cy="68" r="7" fill="#fff" stroke="#111" stroke-width="2.8" />
+                    <circle cx="114" cy="68" r="7" fill="#fff" stroke="#111" stroke-width="2.8" />
+                    <circle cx="81" cy="66" r="3.2" fill="#111" />
+                    <circle cx="99" cy="66" r="3.2" fill="#111" />
+                    <path
+                      d="M74 58h12M94 58h12"
+                      stroke="#111"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                    />
+                    <ellipse
+                      cx="90"
+                      cy="74"
+                      rx="5"
+                      ry="4"
+                      fill="#fff"
+                      stroke="#111"
+                      stroke-width="2"
+                    />
+                    <path d="M62 82c14 16 32 16 56 0" fill="#111" />
+                    <path
+                      d="M78 92q12 8 24 0"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                    />
+                    <path d="M58 108q32-22 64 0l10 58H48z" fill="#111" />
+                    <path
+                      d="M78 106l12 32 12-32"
+                      fill="#fff"
+                      stroke="#111"
+                      stroke-width="2.4"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="90" cy="148" r="3" fill="#fff" />
+                    <circle cx="90" cy="160" r="3" fill="#fff" />
+                    <path
+                      d="M58 114q-18 22-20 44"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="12"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="38" cy="160" r="9" fill="#fff" stroke="#111" stroke-width="2.8" />
+                    <path
+                      d="M122 114q18 22 20 44"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="12"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="142" cy="160" r="9" fill="#fff" stroke="#111" stroke-width="2.8" />
+                    <path
+                      d="M152 78v92"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="3.2"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="152" cy="74" r="7" fill="none" stroke="#111" stroke-width="3.2" />
+                    <path
+                      d="M76 166v28M104 166v28"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="14"
+                      stroke-linecap="round"
+                    />
+                    <ellipse cx="70" cy="196" rx="16" ry="7" fill="#111" />
+                    <ellipse cx="112" cy="196" rx="16" ry="7" fill="#111" />
+                  </svg>
+                </div>
+                <div class="chance-art chance-art-multi" aria-hidden="true">
+                  <svg viewBox="0 0 200 200">
+                    <g transform="rotate(-6 110 100)">
+                      <rect x="88" y="2" width="44" height="30" rx="3" fill="#111" />
+                      <ellipse cx="110" cy="34" rx="38" ry="7" fill="#111" />
+                      <rect x="92" y="24" width="36" height="6" fill="#fff" />
+                      <circle
+                        cx="110"
+                        cy="64"
+                        r="26"
+                        fill="#fff"
+                        stroke="#111"
+                        stroke-width="3.2"
+                      />
+                      <circle cx="86" cy="64" r="7" fill="#fff" stroke="#111" stroke-width="2.8" />
+                      <circle cx="134" cy="64" r="7" fill="#fff" stroke="#111" stroke-width="2.8" />
+                      <circle cx="101" cy="62" r="3.2" fill="#111" />
+                      <circle cx="119" cy="62" r="3.2" fill="#111" />
+                      <path
+                        d="M94 54h12M114 54h12"
+                        stroke="#111"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                      />
+                      <path d="M82 78c14 16 32 16 56 0" fill="#111" />
+                      <path d="M78 102q36-22 68 8l-4 54H72z" fill="#111" />
+                      <path
+                        d="M98 100l14 28 16-24"
+                        fill="#fff"
+                        stroke="#111"
+                        stroke-width="2.4"
+                        stroke-linejoin="round"
+                      />
+                      <circle cx="114" cy="140" r="3" fill="#fff" />
+                      <path
+                        d="M80 112q-24 6-36 4"
+                        fill="none"
+                        stroke="#111"
+                        stroke-width="12"
+                        stroke-linecap="round"
+                      />
+                      <circle cx="42" cy="116" r="9" fill="#fff" stroke="#111" stroke-width="2.8" />
+                      <path
+                        d="M144 112q24 4 36 0"
+                        fill="none"
+                        stroke="#111"
+                        stroke-width="12"
+                        stroke-linecap="round"
+                      />
+                      <circle
+                        cx="182"
+                        cy="112"
+                        r="9"
+                        fill="#fff"
+                        stroke="#111"
+                        stroke-width="2.8"
+                      />
+                      <path
+                        d="M40 92v78"
+                        fill="none"
+                        stroke="#111"
+                        stroke-width="3.2"
+                        stroke-linecap="round"
+                      />
+                      <circle cx="40" cy="88" r="7" fill="none" stroke="#111" stroke-width="3.2" />
+                      <path
+                        d="M94 162l-10 30M132 160l20 32"
+                        fill="none"
+                        stroke="#111"
+                        stroke-width="14"
+                        stroke-linecap="round"
+                      />
+                      <ellipse cx="76" cy="194" rx="16" ry="7" fill="#111" />
+                      <ellipse cx="160" cy="194" rx="16" ry="7" fill="#111" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <button id="chance-continue" class="gold-button">CONTINUE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="award" hidden role="status" aria-live="polite">
+        <span id="award-result"></span>
+        <h2 id="award-title">YOU WIN</h2>
+        <div class="award-panel"><strong id="award-amount"></strong></div>
+      </div>
+      <dialog id="lobby-dialog" class="wallet-dialog" aria-labelledby="lobby-title">
+        <button class="wallet-close" data-close aria-label="Close lobby">×</button>
+        <div class="wallet-emblem" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z" />
+          </svg>
+        </div>
+        <div class="wallet-eyebrow">FORTUNE CITY</div>
+        <h2 id="lobby-title">Lobby</h2>
+        <span class="coming-soon">COMING SOON</span>
+        <p>The lobby is coming soon.<br />Your seat in the studio is ready.</p>
+        <button class="wallet-primary" data-close>Return to game</button>
+      </dialog>
+      <dialog id="deposit-dialog" class="wallet-dialog" aria-labelledby="deposit-title">
+        <button class="wallet-close" data-close aria-label="Close deposit">×</button>
+        <div class="wallet-emblem" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 6h15v14H4zM4 6V4h13v2M15 11h6v5h-6z" />
+            <path d="M17.5 13.5h1" />
+          </svg>
+        </div>
+        <div class="wallet-eyebrow">FORTUNE CITY <span class="demo-tag">DEMO</span></div>
+        <h2 id="deposit-title">Deposit</h2>
+        <div class="wallet-balance">
+          <span>Available balance</span><strong data-wallet-balance>$0</strong>
+        </div>
+        <form novalidate>
+          <fieldset>
+            <label for="deposit-amount">Amount</label>
+            <div class="deposit-input">
+              <span aria-hidden="true">$</span
+              ><input
+                id="deposit-amount"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="Enter amount"
+                required
+                aria-describedby="deposit-error"
+              /><span class="deposit-unit">COINS</span>
+            </div>
+            <div class="deposit-presets">
+              <button type="button" data-amount="1000">1K</button
+              ><button type="button" data-amount="5000">5K</button
+              ><button type="button" data-amount="10000">10K</button
+              ><button type="button" data-amount="50000">50K</button>
+            </div>
+            <p id="deposit-error" role="alert"></p>
+            <button type="submit" class="wallet-primary">Add to balance</button>
+          </fieldset>
+        </form>
+        <div data-deposit-success hidden>
+          <div class="deposit-check" aria-hidden="true">✓</div>
+          <h3>Deposit complete</h3>
+          <strong data-added></strong>
+          <p>Added to your game balance.</p>
+          <button class="wallet-primary" data-close>Return to game</button>
+        </div>
+        <p class="deposit-status" role="status" aria-live="polite"></p>
+      </dialog>
+      <dialog id="help-dialog" class="wallet-dialog help-dialog" aria-labelledby="help-title">
+        <button class="close-dialog wallet-close" aria-label="Close help">×</button>
+        <div class="wallet-eyebrow">FORTUNE CITY</div>
+        <h2 id="help-title">Take your seat</h2>
+        <p>
+          Pick a chip, choose your numbers and watch the wheel. You have
+          <span data-betting-seconds>10</span> seconds to place your bets.
+        </p>
+        <dl>
+          <dt>The wheel</dt>
+          <dd>
+            Bet on 1, 2, 5 or 10. A match pays the shown odds and returns your winning stake. Bets
+            close when the timer ends.
+          </dd>
+          <dt>Chance</dt>
+          <dd>
+            A gift or a multiplier for the next spin. With a multiplier, your bets stay on the
+            table. You cannot bet directly on Chance.
+          </dd>
+          <dt>2 Rolls &amp; 4 Rolls</dt>
+          <dd>
+            A matching bonus bet takes you into the city. Collect the multipliers on each stop.
+            Doubles add a roll, except when leaving jail. Leave jail with doubles or after three
+            attempts.
+          </dd>
+        </dl>
+        <p class="help-note">
+          Made for fun. Deposits add game coins only, with no cash value. Your balance stays in this
+          browser. By default, every wheel segment has an equal chance.
+        </p>
+        <footer class="help-credit">
+          Developed by <strong>NaorX</strong><br /><a
+            href="https://github.com/NaorX"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          ><span> / </span
+          ><a href="https://NaorX.com" target="_blank" rel="noopener noreferrer">NaorX.com</a>
+        </footer>
+      </dialog>
+    </main>
+    <script type="module" src="js/main.mjs?v=config-defaults"></script>
+  </body>
+</html>

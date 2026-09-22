@@ -1,0 +1,269 @@
+/* Touch layout and short-screen adjustments. */
+@media (max-width: 700px) {
+  #game {
+    min-height: 0;
+    height: 100dvh;
+  }
+  .console {
+    bottom: max(8px, env(safe-area-inset-bottom));
+  }
+  .dock-actions button {
+    min-height: 38px;
+  }
+  body:not(.bonus):not(.bonus-transition) .results-dock {
+    top: 55px;
+    bottom: auto;
+  }
+  body:not(.bonus):not(.bonus-transition) .dock-actions {
+    position: fixed;
+    right: 12px;
+    bottom: 249px;
+  }
+  body.bonus .results-dock,
+  body.bonus-transition .results-dock {
+    top: auto;
+  }
+  .wallet-dialog {
+    max-height: calc(100dvh - 24px);
+    padding: 24px;
+  }
+  .wallet-close {
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    right: 5px;
+  }
+  .deposit-input input {
+    font-size: 18px;
+  }
+  .deposit-presets button {
+    min-height: 40px;
+  }
+  #help-dialog {
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    padding: 24px;
+  }
+  .wallet strong,
+  .stake strong {
+    font-size: clamp(12px, 3.8vw, 15px);
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  #game {
+    height: 100dvh;
+    min-height: 0;
+  }
+  .console {
+    bottom: max(6px, env(safe-area-inset-bottom));
+    padding: 0 12px;
+  }
+  .table-layout {
+    margin-bottom: 6px;
+  }
+  .bet-row {
+    max-width: 360px;
+    grid-template-rows: repeat(2, 40px);
+    gap: 4px;
+  }
+  .bet .number-ring {
+    width: 25px;
+    height: 25px;
+    font-size: 18px;
+  }
+  .console-top {
+    height: 42px;
+  }
+  .chip-picker {
+    position: static;
+    transform: none;
+    gap: 7px;
+  }
+  .chip,
+  .chip:nth-child(n) {
+    width: 32px;
+    height: 32px;
+  }
+  .table-brand {
+    display: none;
+  }
+  .results-dock {
+    right: 10px;
+    bottom: 65px;
+    width: 164px;
+  }
+  .history {
+    gap: 3px;
+  }
+  .history-bubble {
+    height: 18px;
+    font-size: 9px;
+  }
+  .dock-actions {
+    gap: 4px;
+    margin-top: 5px;
+  }
+  .dock-actions button {
+    height: 32px;
+    min-height: 32px;
+    padding: 0 8px;
+    font-size: 9px;
+  }
+  .round-clock {
+    height: 25px;
+    margin-bottom: 5px;
+  }
+  .clock-face {
+    width: 25px;
+    height: 25px;
+  }
+  .round-clock strong {
+    font-size: 9px;
+  }
+  .wallet-dialog {
+    padding: 20px 24px;
+    max-height: calc(100dvh - 16px);
+  }
+  .wallet-emblem {
+    display: none;
+  }
+  .wallet-dialog h2 {
+    margin: 8px 0 12px;
+    font-size: 25px;
+  }
+  .wallet-balance {
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+  .wallet-dialog::backdrop {
+    backdrop-filter: blur(2px);
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  body:not(.bonus):not(.bonus-transition) .results-dock {
+    top: auto;
+    bottom: 65px;
+  }
+  body:not(.bonus):not(.bonus-transition) .dock-actions {
+    position: static;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .table-layout {
+    display: block;
+  }
+  .bet-row {
+    width: 360px;
+    max-width: 48vw;
+    margin: 0 auto;
+    transform: none;
+  }
+  .bet strong {
+    font-size: 20px;
+  }
+  .bet em {
+    font-size: 10px;
+  }
+  .bet .dice-icon {
+    font-size: 16px;
+  }
+  .payout {
+    font-size: 7px;
+  }
+  .console-top {
+    min-height: 38px;
+  }
+}
+
+.chip-1 {
+  --chip-color: #66675d;
+  --chip-light: #aaac9a;
+  --chip-rim: #f4efdc;
+  --chip-side: #34392f;
+}
+.chip-5 {
+  --chip-color: #8e4c29;
+  --chip-light: #c98d59;
+  --chip-rim: #f6e3bf;
+  --chip-side: #532a1a;
+}
+.chip-10 {
+  --chip-color: #a98732;
+  --chip-light: #d9bc68;
+  --chip-rim: #fff1c7;
+  --chip-side: #675023;
+}
+@media (max-width: 700px) {
+  .chip-picker {
+    gap: 6px;
+  }
+  .chip,
+  .chip:nth-child(n) {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+}
+@media (max-width: 360px) {
+  .chip-picker {
+    gap: 4px;
+    left: 50%;
+  }
+}
+
+.chip-picker :is(#clear, #repeat-bet) {
+  position: static;
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: 0 0 0 6px;
+  padding: 0;
+  border: 1px solid #cbb78299;
+  border-radius: 50%;
+  background: #192b25;
+  color: #f1dba1;
+  box-shadow: inset 0 0 0 3px #ffffff05;
+}
+.chip-picker :is(#clear, #repeat-bet) svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.chip-picker :is(#clear, #repeat-bet):enabled:hover {
+  background: #344336;
+  border-color: #f1dba1;
+}
+.chip-picker :is(#clear, #repeat-bet):enabled:active {
+  transform: scale(0.94);
+}
+@media (max-width: 700px), (max-height: 500px) {
+  .chip-picker :is(#clear, #repeat-bet) {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    margin-left: 4px;
+  }
+}
+
+.chip-picker :is(#clear, #repeat-bet)[hidden] {
+  display: none;
+}
+.bet.bet-10:not(.bet-roll2):not(.bet-roll4) strong,
+.bet.bet-10.has-bet:not(.bet-roll2):not(.bet-roll4) strong {
+  font-size: 17px;
+  letter-spacing: -0.5px;
+}
+@media (max-width: 700px) {
+  .bet.bet-10:not(.bet-roll2):not(.bet-roll4) strong,
+  .bet.bet-10.has-bet:not(.bet-roll2):not(.bet-roll4) strong {
+    font-size: 16px;
+  }
+}
