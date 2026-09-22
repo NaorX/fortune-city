@@ -1,39 +1,45 @@
 # Fortune City
 
-A 3D browser game developed by [NaorX](https://github.com/NaorX), inspired by the studio atmosphere and city bonus rounds of **MONOPOLY Live**. Built for fun, with an animated host, a spinning wheel and a city board to explore with every bonus roll.
+**A spinning wheel. A city to explore. A little show with every round.**
 
-<!-- Add a gameplay video and screenshots here. Use GitHub-uploaded media or relative paths to files included in the repository. -->
+Created by [NaorX](https://naorx.com), Fortune City brings an animated studio and a playable 3D city into the browser. Inspired by the presentation of **MONOPOLY Live**, it is a personal project built for the enjoyment of making and playing games.
 
-## The game
+<!-- Gameplay video and screenshots go here. Upload media through GitHub or add relative links to files in the repository. -->
 
-Place game coins during a ten-second betting window, then follow the wheel. A matching 2 Rolls or 4 Rolls bet opens the city bonus: dice, property multipliers and a running win total. Chance brings gifts or a multiplier for the next spin.
+## Inside the game
 
-The game includes touch layouts, background music and a demo wallet. Balances and recent results are saved locally in your browser. No accounts, real deposits, withdrawals or cash prizes are involved. Outcomes favor placed bets for demonstration purposes; Chance has a 30% probability.
+- **The studio:** a detailed wheel, animated host, newspaper-reading guest and a daytime skyline.
+- **The city:** 2 Rolls and 4 Rolls bonuses, close-up camera tours, dice, property cards and animated win totals.
+- **The table:** seven chip values, Repeat Bet, undo, Chance cards and recent results.
+- **The atmosphere:** background music, adjustable sound, fireworks, quick chat and layouts for desktop and mobile.
 
-## Run locally
+Play uses game coins with no cash value. The wallet is a demo, progress stays in your browser, and chat is local to your browser session. By default, every wheel segment is equally likely; your bets never influence the selected result.
 
-With Node.js 18 or later installed:
+## Try it locally
+
+Install Node.js 18 or later, then run:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://localhost:4173. Keep the server running while you play.
+Open **http://localhost:4173** and keep the server running while you play. The application lives in `dist/` and needs no build step. Source is grouped into scenes, characters, game rules, sound and interface modules.
 
-`dist/` contains the editable application and can be served by a static host without a build step. JavaScript is organized into game rules, characters, scenes, effects, audio and interface modules. Styles are in `dist/styles/`; local checks and tests are in `scripts/` and `tests/`.
+## Make it your own
 
-```sh
-npm run check
-npm test
-```
+Edit **[dist/config.mjs](dist/config.mjs)**, save and refresh. Each setting has a short explanation. Change the starting coins, betting window, Chance frequency, bonus gifts or presentation timing without editing the game logic.
 
-## Credits and use
+Leave `chancePercent: null` for the standard wheel distribution: Chance occupies 2 of 54 segments, approximately 3.70%. Set it to `20` for a 20% Chance frequency, or `0` to disable Chance. Custom percentages change the odds without changing the wheel artwork. No setting targets a player's bet or forces a near miss. Starting coins apply only to browsers without saved progress.
 
-Developed by **NaorX** as a personal entertainment project. Inspired by MONOPOLY Live, but not affiliated with, endorsed by or licensed by Hasbro or Evolution. Third-party names and trademarks belong to their respective owners. No rights to those names, brands or other third-party material are granted by this repository. The Three.js MIT license is included in `dist/vendor/THREE-LICENSE.txt` and must be retained.
+Run `npm run check` and `npm test` after changes. Invalid setting values are reported with the setting name.
 
-This is not a real-money gambling product. Anyone modifying, distributing or operating it is responsible for their own use, including obtaining any necessary permissions, licenses and regulatory approvals. This notice does not replace those requirements or override applicable law.
+## Personal use and custom work
 
-## Contact
+You are welcome to run, study and modify Fortune City privately for personal, non-commercial use. Public deployment, redistribution, commercial use and removal of creator credit require prior written permission from NaorX. See [LICENSE.md](LICENSE.md) for the full terms, including the exception for repository viewing and forks allowed by GitHub.
 
-For further development, custom projects or collaboration, get in touch at [NaorX.com](https://NaorX.com). More projects: [github.com/NaorX](https://github.com/NaorX).
+Want a tailored version or a complete website around it? [Contact NaorX](https://naorx.com) for custom design, further development, integrations and a separate deployment or licensing agreement.
+
+## Credits
+
+Developed by [NaorX](https://naorx.com). Inspired by MONOPOLY Live; not affiliated with, endorsed by or licensed by Hasbro or Evolution. Third-party names and trademarks belong to their respective owners, and this project grants no rights to them. Three.js is included under its [MIT license](dist/vendor/THREE-LICENSE.txt).
