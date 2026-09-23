@@ -1,4 +1,4 @@
-# Fortune City
+# Fortune City - A Monopoly Live-inspired browser game
 
 **A spinning wheel. A city to explore. A little show with every round.**
 
