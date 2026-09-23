@@ -267,3 +267,10 @@
     font-size: 16px;
   }
 }
+
+/* Keep the mobile stage clear until the round and award have finished. */
+@media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
+  body.bets-locked .dock-actions {
+    display: none;
+  }
+}
