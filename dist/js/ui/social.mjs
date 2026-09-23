@@ -83,14 +83,8 @@ export function initSocial({ setVolume }) {
   const volumePanel = $('#volume-panel');
   const slider = $('#volume-level');
   const mute = $('#volume-mute');
-  let volume = 0,
-    previous = 50;
-  try {
-    previous = Math.max(
-      1,
-      Math.min(100, Number(localStorage.getItem('fortune-city-volume')) || 50),
-    );
-  } catch {}
+  let volume = 3,
+    previous = 3;
   function apply(value) {
     volume = Math.max(0, Math.min(100, Number(value) || 0));
     if (volume > 0) previous = volume;
@@ -104,9 +98,6 @@ export function initSocial({ setVolume }) {
       'aria-label',
       volume ? `Sound settings, volume ${volume}%` : 'Sound settings, muted',
     );
-    try {
-      localStorage.setItem('fortune-city-volume', String(previous));
-    } catch {}
     setVolume(volume / 100);
   }
   sound.onclick = () => {
@@ -130,5 +121,5 @@ export function initSocial({ setVolume }) {
       sound.focus();
     } else if (!panel.hidden) openChat(false);
   });
-  apply(0);
+  apply(3);
 }
