@@ -1,5 +1,5 @@
 import { SETTINGS } from './game/settings.mjs';
-import { initSocial } from './ui/social.mjs';
+import { initSocial } from './ui/social.mjs?v=volume-default';
 import { createHost } from './characters/host.mjs';
 import { addMakerMark } from './scenes/maker-mark.mjs?v=integrated';
 import { initWallet } from './ui/wallet.mjs';
@@ -255,26 +255,6 @@ $('#refill').onclick = () => {
     toast(SETTINGS.refillCoins.toLocaleString('en-US') + ' fresh coins. Good luck!');
   }
 };
-initSocial({
-  setVolume(value) {
-    muted = value === 0;
-    if (!audioCtx && muted) return;
-    try {
-      audioCtx ??= new (window.AudioContext || window.webkitAudioContext)();
-      if (!audioOutput) {
-        audioOutput = audioCtx.createGain();
-        audioOutput.gain.value = 0;
-        audioOutput.connect(audioCtx.destination);
-      }
-      if (!muted) audioCtx.resume();
-      audioOutput.gain.setTargetAtTime(value, audioCtx.currentTime, 0.04);
-      music ??= createMusic(audioCtx, () => bonusView, audioOutput);
-      music.setEnabled(!muted);
-    } catch {
-      toast('Sound is unavailable in this browser.');
-    }
-  },
-});
 $('#help').onclick = () => $('#help-dialog').showModal();
 initWallet({
   getBalance: () => balance,
@@ -847,7 +827,11 @@ function targets() {
     camPos.set(-0.25, 4.65, distance);
     camLook.set(-0.25, 4.15, 0);
   } else {
-    camPos.set(mobile ? 0 : 0, mobile ? 7.1 : 6.6, mobile ? 24.7 : 20.3);
+    // Fit both seated guest and host inside narrow portrait screens.
+    const studioDistance = mobile
+      ? Math.max(26.8, 11.4 / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect))
+      : 20.3;
+    camPos.set(0, mobile ? 7.1 : 6.6, studioDistance);
     camLook.set(0, mobile ? 3.45 : 2.7, 0);
   }
 }
@@ -1730,6 +1714,35 @@ function positionStudioAward() {
   const game = $('#game').getBoundingClientRect();
   award.style.setProperty('--award-bottom', `${game.bottom - table.top + 12}px`);
 }
+
+initSocial({
+  setVolume(value) {
+    muted = value === 0;
+    if (!audioCtx && muted) return;
+    try {
+      audioCtx ??= new (window.AudioContext || window.webkitAudioContext)();
+      if (!audioOutput) {
+        audioOutput = audioCtx.createGain();
+        audioOutput.gain.value = 0;
+        audioOutput.connect(audioCtx.destination);
+      }
+      if (!muted) audioCtx.resume().catch(() => {});
+      audioOutput.gain.setTargetAtTime(value, audioCtx.currentTime, 0.04);
+      music ??= createMusic(audioCtx, () => bonusView, audioOutput);
+      music.setEnabled(!muted);
+    } catch {
+      toast('Sound is unavailable in this browser.');
+    }
+  },
+});
+// Browsers may wait for a user gesture before allowing audio playback.
+function resumeGameAudio() {
+  if (!muted && audioCtx && audioCtx.state !== 'running') {
+    audioCtx.resume().catch(() => {});
+  }
+}
+document.addEventListener('pointerdown', resumeGameAudio, { passive: true });
+document.addEventListener('keydown', resumeGameAudio);
 
 $('#refill').textContent = 'REFILL ' + SETTINGS.refillCoins.toLocaleString('en-US');
 $$('[data-betting-seconds]').forEach((el) => (el.textContent = SETTINGS.bettingSeconds));
