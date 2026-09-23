@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="styles/tickets.css?v=clear-numbers" />
     <link rel="stylesheet" href="styles/bonus-show.css?v=title-visible" />
     <link rel="stylesheet" href="styles/wallet.css?v=help-style" />
-    <link rel="stylesheet" href="styles/mobile.css?v=round-actions" />
-    <link rel="stylesheet" href="styles/social.css" />
+    <link rel="stylesheet" href="styles/mobile.css?v=portrait-studio" />
+    <link rel="stylesheet" href="styles/social.css?v=compact-chat" />
   </head>
   <body>
     <main id="game">
@@ -58,7 +58,7 @@
             maxlength="180"
             autocomplete="off"
             dir="auto"
-          /><button type="submit" aria-label="Send quick message" disabled>↑</button>
+          /><button type="submit" aria-label="Send quick message" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" /></svg></button>
         </form>
         <div id="quick-messages" aria-live="polite"></div>
       </section>
@@ -76,7 +76,7 @@
             maxlength="180"
             autocomplete="off"
             dir="auto"
-          /><button type="submit" aria-label="Send message" disabled>↑</button>
+          /><button type="submit" aria-label="Send message" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" /></svg></button>
         </form>
       </aside>
       <div id="volume-panel" role="group" aria-label="Volume controls" hidden>
@@ -602,6 +602,6 @@
         </footer>
       </dialog>
     </main>
-    <script type="module" src="js/main.mjs?v=config-defaults"></script>
+    <script type="module" src="js/main.mjs?v=volume-default"></script>
   </body>
 </html>
