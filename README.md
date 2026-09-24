@@ -51,9 +51,10 @@ Run `npm run check` and `npm test` after changes. Invalid setting values are rep
 
 ## Personal use and custom work
 
-You are welcome to run, study and modify Fortune City privately for personal, non-commercial use. Public deployment, redistribution, commercial use and removal of creator credit require prior written permission from NaorX. See [LICENSE.md](LICENSE.md) for the full terms, including the exception for repository viewing and forks allowed by GitHub.
+Fortune City is a personal project made for fun. You're welcome to explore the code, run it locally and make it your own for private, non-commercial use. Please keep the original credits.
+If you'd like to publish your version, use it commercially or redistribute it, get in touch first so we can agree on permission. The full terms are in [LICENSE.md](LICENSE.md).
 
-Want a tailored version or a complete website around it? [Contact NaorX](https://naorx.com) for custom design, further development, integrations and a separate deployment or licensing agreement.
+Have something else in mind? I'm happy to talk about custom features, design or a project of your own. You can find me at [naorx.com](https://naorx.com).
 
 ## Credits
 
